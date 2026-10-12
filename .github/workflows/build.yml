@@ -1,0 +1,104 @@
+name: build
+
+on:
+  # Pull requests get a quick debug build. The desktop app is compiled too, so a
+  # change that breaks it is caught, but only the web app is kept.
+  pull_request:
+    branches: [main]
+  # Tags produce the release build of the web app and publish it.
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # the wrapper's welcome text is noise in a log
+  KOTLIN_CLI_NO_WELCOME_BANNER: "1"
+
+jobs:
+  # --- pull request: debug builds ---------------------------------------------------
+
+  check:
+    name: debug (web)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # the toolchain, the JDK it provisions and the downloaded libraries
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/JetBrains/Kotlin
+          key: kotlin-${{ runner.os }}-${{ hashFiles('kotlin', 'libs.versions.toml', '**/module.yaml', '*.module-template.yaml') }}
+          restore-keys: kotlin-${{ runner.os }}-
+
+      - run: chmod +x kotlin
+
+      - name: Build
+        run: ./kotlin build -m webApp -m desktopApp
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-debug
+          path: build/tasks/_webApp_buildWasmJsAppWasmJsDebug/
+          if-no-files-found: error
+
+  # --- tag: release build -----------------------------------------------------------
+
+  web:
+    name: release (web)
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/JetBrains/Kotlin
+          key: kotlin-${{ runner.os }}-${{ hashFiles('kotlin', 'libs.versions.toml', '**/module.yaml', '*.module-template.yaml') }}
+          restore-keys: kotlin-${{ runner.os }}-
+
+      - run: chmod +x kotlin
+
+      - name: Build the production web app
+        run: ./kotlin build -m webApp -v release
+
+      - name: Zip it
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          cd build/tasks/_webApp_buildWasmJsAppWasmJsRelease
+          zip -r "$GITHUB_WORKSPACE/out/tip-frame-${GITHUB_REF_NAME}-web.zip" .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-web
+          path: out/*
+          if-no-files-found: error
+
+  publish:
+    name: publish GitHub release
+    needs: [web]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: release-*
+          path: out
+          merge-multiple: true
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          ls -la out
+          gh release create "${GITHUB_REF_NAME}" out/* \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes

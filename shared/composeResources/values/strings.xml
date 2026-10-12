@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">TipFrame</string>
+    <string name="app_repo_link">https://github.com/Ma7moud3ly/tip-frame</string>
+    <string name="app_wordmark">{_} TipFrame</string>
+
+    <!-- toolbar -->
+    <string name="toolbar_copy_link">Copy link</string>
+    <string name="toolbar_copy_image">Copy image</string>
+    <string name="toolbar_export">Export PNG</string>
+    <string name="toolbar_reset">Reset</string>
+    <string name="toolbar_github">GitHub</string>
+    <string name="toolbar_theme_light">Light theme</string>
+    <string name="toolbar_theme_dark">Dark theme</string>
+
+    <!-- credit under the wordmark -->
+    <string name="app_powered_by">powered by</string>
+    <string name="app_nemo_name">nemo-editor</string>
+    <string name="app_nemo_link">https://github.com/Ma7moud3ly/nemo-editor</string>
+
+    <!-- dialogs -->
+    <string name="dialog_close">Close</string>
+
+    <!-- messages -->
+    <string name="msg_link_copied">Link copied</string>
+    <string name="msg_image_copied">Image copied</string>
+    <string name="msg_image_saved">Image saved</string>
+
+    <!-- dock buttons and dialog titles -->
+    <string name="tools_theme">Code theme</string>
+    <string name="tools_background">Background</string>
+    <string name="tools_author">Author</string>
+
+    <!-- background -->
+    <string name="background_style">Style</string>
+    <string name="background_none">None</string>
+    <string name="background_solid">Solid</string>
+    <string name="background_gradient">Gradient</string>
+    <string name="background_mesh">Mesh</string>
+    <string name="background_dots">Dots</string>
+    <string name="background_grid">Grid</string>
+    <string name="background_lines">Lines</string>
+    <string name="background_colors">Colors</string>
+    <string name="background_padding">Padding</string>
+    <string name="background_shadow">Shadow</string>
+
+    <!-- frame -->
+    <string name="frame_window">Window</string>
+    <string name="frame_mac">macOS</string>
+    <string name="frame_windows">Windows</string>
+    <string name="frame_terminal">Terminal</string>
+    <string name="frame_browser">Browser</string>
+    <string name="frame_phone">Phone</string>
+    <string name="frame_none">None</string>
+    <string name="frame_title_hint">Untitled</string>
+
+    <!-- editor -->
+    <string name="editor_language">Language</string>
+    <string name="editor_lines">Line numbers</string>
+    <string name="editor_zoom_in">Larger text</string>
+    <string name="editor_zoom_out">Smaller text</string>
+
+    <!-- author -->
+    <string name="author_name">Name</string>
+    <string name="author_handle">Handle</string>
+    <string name="author_watermark">TipFrame watermark</string>
+    <string name="avatar_none">None</string>
+    <string name="avatar_initials">Initials</string>
+    <string name="avatar_linkedin">LinkedIn</string>
+    <string name="avatar_x">X</string>
+    <string name="avatar_instagram">Instagram</string>
+    <string name="avatar_facebook">Facebook</string>
+</resources>

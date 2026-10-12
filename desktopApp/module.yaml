@@ -1,0 +1,15 @@
+product: jvm/app
+
+apply:
+  - //common.module-template.yaml
+
+dependencies:
+  - //shared
+  - $compose.desktop.currentOs
+  - $compose.preview
+  - $libs.kotlinx.coroutines.swing
+
+settings:
+  compose: enabled
+  jvm:
+    mainClass: com.ma7moud3ly.tipframe.MainKt

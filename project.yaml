@@ -1,0 +1,4 @@
+modules:
+  - desktopApp
+  - shared
+  - webApp

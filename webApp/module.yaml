@@ -1,0 +1,11 @@
+product: wasm-js/app
+
+apply:
+  - //common.module-template.yaml
+
+dependencies:
+  - //shared
+  - $compose.ui
+
+settings:
+  compose: enabled
