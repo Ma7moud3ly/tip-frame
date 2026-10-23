@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">TipFrame</string>
     <string name="app_repo_link">https://github.com/Ma7moud3ly/tip-frame</string>
-    <string name="app_wordmark">{_} TipFrame</string>
+    <!-- the wordmark: the app's name in two weights -->
+    <string name="app_wordmark_tip">Tip</string>
+    <string name="app_wordmark_frame">Frame</string>
 
     <!-- toolbar -->
     <string name="toolbar_copy_link">Copy link</string>
