@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma7moud3ly.tipframe.feature.tipframe.EditorPadding
+import com.ma7moud3ly.tipframe.feature.tipframe.guardBackticks
 import com.ma7moud3ly.tipframe.model.AuthorAvatar
 import com.ma7moud3ly.tipframe.model.BackgroundStyle
 import com.ma7moud3ly.tipframe.model.EXPORT_SCALE
@@ -334,6 +335,7 @@ private fun TipFrameWindow(
             onTitleChange = onTitleChange
         )
         key(codeState) {
+            codeState.guardBackticks()
             Box {
                 NemoCodeEditor(
                     state = codeState,

@@ -119,7 +119,7 @@ class TipFrameViewModel(
 
     /** The whole image as it is now: the options, the code and the highlighted lines. */
     fun snapshot(): TipFrameConfig = config.copy(
-        code = codeState.code,
+        code = BacktickGuard.strip(codeState.code),
         highlights = codeState.highlights.map { it.line }.sorted(),
         fontSize = editorSettings.fontSizeState.value
             .coerceIn(TipFrameConfig.FONT_SIZE_MIN, TipFrameConfig.FONT_SIZE_MAX)
